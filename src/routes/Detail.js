@@ -13,6 +13,8 @@ function Detail() {
         ).json();
         console.log(json);
         setDetail(json);
+        console.log(json.genres);
+        console.log(json.genres[0].name);
     };
 
     useEffect(() => {
@@ -23,7 +25,10 @@ function Detail() {
 
     return (
         <div>
-            
+            <img src={"https://image.tmdb.org/t/p/w400"+ detail.backdrop_path} alt={detail.title} />
+            <h1>{detail.title}</h1>
+            <p>{detail.overview}</p>
+        
         </div>
     )
 }
