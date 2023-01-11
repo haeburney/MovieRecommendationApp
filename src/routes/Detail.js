@@ -25,10 +25,18 @@ function Detail() {
 
     return (
         <div>
-            <img src={"https://image.tmdb.org/t/p/w400"+ detail.backdrop_path} alt={detail.title} />
+            <img src={"https://image.tmdb.org/t/p/original"+ detail.backdrop_path} alt={detail.title} />
+            <img src={"https://image.tmdb.org/t/p/original"+ detail.poster_path} alt={detail.title}/>
             <h1>{detail.title}</h1>
+            <h2>{detail.tagline}</h2>
+            <p>{detail.release_date}</p>
             <p>{detail.overview}</p>
-        
+            <ul>
+               {/*  {detail && detail.genres.map(([key,value])=><li key={key}>{key} {value}</li>)} */}
+               {detail.genres && detail.genres.map((g)=><li key={g.id}>{g.name}</li>)} 
+            </ul>
+            <p>예산 : {detail.budget}$</p>
+           {/*  {console.log(detail.genres[0].name)} */}
         </div>
     )
 }
