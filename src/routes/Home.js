@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { TMDB_KEY, URL, BASE_LANG, BASE_REGION } from '../config';
 import style from './Home.module.css';
+//import background from "../image/bg.jpg";
 
 function Home() {
     /* const URL = "https://api.themoviedb.org/3/movie/";
@@ -35,38 +36,45 @@ function Home() {
     return (
         <div>
             <nav className={`${style.navbar}`}>
-                <Link to='/'>
-                    Home
+                <Link to='/' className={`${style.logo}`}>
+                    HYEFLIX
                 </Link>
 
-                <ul>
+                <ul className={`${style.menu}`}>
 
-                    <li className={`${style.nav}`}>
-                        <Link to='/'>
+                    <li className={`${style.list}`}>
+                        <Link to='/' >
                             액션
                         </Link>
                     </li>
 
-                    <li className={`${style.nav}`}>
+                    <li className={`${style.list}`}>
                         <Link to='/'>
                             로맨스
                         </Link>
                     </li>
 
-                    <li className={`${style.nav}`}>
+                    <li className={`${style.list}`}>
                         <Link to='/'>
-                            sf
+                            SF
                         </Link>
                     </li>
 
-                    <li className={`${style.nav}`}>
+                    <li className={`${style.list}`}>
                         <Link to='/'>
                             애니메이션
+                        </Link>
+                    </li>
+
+                    <li className={`${style.list}`}>
+                        <Link to='/'>
+                            음악
                         </Link>
                     </li>
                 </ul>
 
             </nav>
+
             {loading ? <h1>Loading...</h1> :
                 <div>{movies.map(movie =>
                     <Movie
@@ -79,6 +87,8 @@ function Home() {
                         id={movie.id}
                     />)} </div>
             }
+
+
         </div>
     )
 }
