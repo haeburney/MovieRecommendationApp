@@ -8,7 +8,7 @@ function Movie({poster_path, title, overview, id, rating}) {
   return (
     <div>
       <div className={`${movie.container}`}>
-        <img src={"https://image.tmdb.org/t/p/w500" + poster_path} alt={title} />
+        <img src={"https://image.tmdb.org/t/p/w400" + poster_path} alt={title} />
         <Link to={`/movie/${id}`}><h2>{title}</h2></Link>
 
         <p>{overview}</p>

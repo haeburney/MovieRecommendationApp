@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { TMDB_KEY, URL, BASE_LANG, BASE_REGION } from '../config';
 import style from './Home.module.css';
-//import background from "../image/bg.jpg";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { EffectCoverflow, Pagination } from "swiper";
 
 function Home() {
-    /* const URL = "https://api.themoviedb.org/3/movie/";
-    const BASE_LANG = 'ko';
-    const BASE_REGION = 'KR'; */
-
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
 
@@ -31,8 +32,6 @@ function Home() {
     }, []);
 
 
-
-
     return (
         <div>
             <nav className={`${style.navbar}`}>
@@ -41,53 +40,61 @@ function Home() {
                 </Link>
 
                 <ul className={`${style.menu}`}>
-
                     <li className={`${style.list}`}>
-                        <Link to='/' >
-                            액션
-                        </Link>
+                        <Link to='/' >액션</Link>
                     </li>
 
                     <li className={`${style.list}`}>
-                        <Link to='/'>
-                            로맨스
-                        </Link>
+                        <Link to='/' >로맨스</Link>
                     </li>
 
                     <li className={`${style.list}`}>
-                        <Link to='/'>
-                            SF
-                        </Link>
+                        <Link to='/' >SF</Link>
                     </li>
 
                     <li className={`${style.list}`}>
-                        <Link to='/'>
-                            애니메이션
-                        </Link>
+                        <Link to='/' >애니메이션</Link>
                     </li>
 
                     <li className={`${style.list}`}>
-                        <Link to='/'>
-                            음악
-                        </Link>
+                        <Link to='/' >음악</Link>
                     </li>
                 </ul>
-
             </nav>
 
-            {loading ? <h1>Loading...</h1> :
-                <div>{movies.map(movie =>
-                    <Movie
-                        key={movie.id}
-                        poster_path={movie.poster_path}
-                        title={movie.title}
-                        overview={movie.overview}
-                        genre_ids={movie.genre_ids}
-                        rating={movie.vote_average}
-                        id={movie.id}
-                    />)} </div>
-            }
 
+            <Swiper
+                effect={"coverflow"}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={4}
+                coverflowEffect={{
+                    rotate: 10,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 2,
+                    slideShadows: true,
+                }}
+                navigation={true}
+                mousewheel={true}
+                pagination={true}
+                modules={[EffectCoverflow, Pagination]}
+                className={`${style.mySwiper}`}
+            >
+                {loading ? <h1>Loading...</h1> :
+                    <div>{movies.map(movie =>
+                        <SwiperSlide>
+                            <Movie
+                                key={movie.id}
+                                poster_path={movie.poster_path}
+                                title={movie.title}
+                                overview={movie.overview}
+                                genre_ids={movie.genre_ids}
+                                rating={movie.vote_average}
+                                id={movie.id}
+                            /></SwiperSlide>)} </div>
+                }
+            </Swiper>
 
         </div>
     )
